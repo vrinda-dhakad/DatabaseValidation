@@ -7,7 +7,6 @@ public class Connections {
     public static String OraCatalogName="";  //Set database name
     public static String OraUsername="";  //Set database username
     public static String OraPassword="";  //Set database password
-    public static String OraHostName="";  //Set server hostname
     public static String OradbURL=String.format("jdbc:oracle:thin:@%s",OraCatalogName);
 
     //PostgreSQL connection details
