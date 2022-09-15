@@ -66,7 +66,7 @@ public class ObjectsValidation {
     public void validateSchemas() throws SQLException, IOException {
         int index=0;
         String object = "Schemas";
-        ora_r = oracon.createStatement().executeQuery("select distinct owner from all_tables where owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY owner");
+        ora_r = oracon.createStatement().executeQuery("select distinct owner from all_tables ORDER BY owner");
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
             results1.add(ora_r.getString(1));
@@ -119,7 +119,7 @@ public class ObjectsValidation {
     public void validateTables() throws SQLException, IOException {
         int index=1;
         String object = "Tables";
-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || table_name  from all_tables where owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY owner, table_name");
+        ora_r = oracon.createStatement().executeQuery("select owner || '.' || table_name  from all_tables ORDER BY owner, table_name");
 
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
@@ -171,7 +171,7 @@ public class ObjectsValidation {
     public void validateViews() throws SQLException, IOException {
         int index=2;
         String object = "Views";
-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || view_name from all_views WHERE owner not in ('ORDDATA','ORDS_METADATA','ORDSYS','GSMADMIN_INTERNAL','SYS','MDSYS','XDB','WMSYS','SYSTEM','CTXSYS','APEX_210200') ORDER BY owner, view_name");
+        ora_r = oracon.createStatement().executeQuery("select owner || '.' || view_name from all_views ORDER BY owner, view_name");
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
             results1.add(ora_r.getString(1));
@@ -224,7 +224,7 @@ public class ObjectsValidation {
     public void validateIndex() throws SQLException, IOException {
         int index=3;
         String object = "Indexes";
-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || index_name  from all_indexes WHERE owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY owner, INDEx_name");
+        ora_r = oracon.createStatement().executeQuery("select owner || '.' || index_name  from all_indexes ORDER BY owner, INDEx_name");
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
             results1.add(ora_r.getString(1));
@@ -276,7 +276,7 @@ public class ObjectsValidation {
     public void validateProcedures() throws SQLException, IOException {
         int index=4;
         String object = "Procedures";
-        ora_r = oracon.createStatement().executeQuery("SELECT Procedure_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='PACKAGE' AND PROCEDURE_NAME IS NOT NULL and owner not in ('WMSYS','ORDS_METADATA','ORDPLUGINS','ORDSYS','GSMADMIN_INTERNAL','APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB','ORDDATA') ORDER BY Procedure_name");
+        ora_r = oracon.createStatement().executeQuery("SELECT Procedure_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='PACKAGE' AND PROCEDURE_NAME IS NOT NULL ORDER BY Procedure_name");
 
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
@@ -328,7 +328,7 @@ public class ObjectsValidation {
     public void validateFunctions() throws SQLException, IOException {
         int index=5;
         String object = "Functions";
-        ora_r = oracon.createStatement().executeQuery("SELECT owner || '.' || Object_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='FUNCTION' AND  owner not in ('ORDSYS','GSMADMIN_INTERNAL','APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB')ORDER BY owner, Object_name");
+        ora_r = oracon.createStatement().executeQuery("SELECT owner || '.' || Object_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='FUNCTION' ORDER BY owner, Object_name");
 
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
@@ -380,7 +380,7 @@ public class ObjectsValidation {
     public void validateTriggers() throws SQLException, IOException {
         int index=6;
         String object = "Triggers";
-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || TRIGGER_NAME from all_triggers WHERE owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB')ORDER BY owner, trigger_name");
+        ora_r = oracon.createStatement().executeQuery("select owner || '.' || TRIGGER_NAME from all_triggers ORDER BY owner, trigger_name");
 
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
@@ -433,7 +433,7 @@ public class ObjectsValidation {
     public void validateSequences() throws SQLException, IOException {
         int index=7;
         String object = "Sequences";
-        ora_r = oracon.createStatement().executeQuery("select sequence_owner || '.' || sequence_name from all_sequences WHERE sequence_owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY sequence_owner, sequence_name");
+        ora_r = oracon.createStatement().executeQuery("select sequence_owner || '.' || sequence_name from all_sequences  ORDER BY sequence_owner, sequence_name");
 
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
@@ -487,7 +487,7 @@ public class ObjectsValidation {
     public void validateConstraints() throws SQLException, IOException {
         int index=8;
         String object = "Constraints";
-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || Constraint_name from ALL_CONSTRAINTS where constraint_type in ('P','F','C','U') and Constraint_name not like 'SYS%'  and owner not in ('WMSYS','ORDS_METADATA','ORDPLUGINS','ORDSYS','GSMADMIN_INTERNAL','APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB','ORDDATA') order by owner, constraint_name");
+        ora_r = oracon.createStatement().executeQuery("select owner || '.' || Constraint_name from ALL_CONSTRAINTS where constraint_type in ('P','F','C','U') and Constraint_name not like 'SYS%' order by owner, constraint_name");
 
         List<String> results1 = new ArrayList<String>();
         while(ora_r.next()) {
