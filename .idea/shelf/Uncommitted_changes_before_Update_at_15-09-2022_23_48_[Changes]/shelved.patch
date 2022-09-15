@@ -1,0 +1,218 @@
+Index: src/test/java/Tests/ObjectsValidation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/Tests/ObjectsValidation.java b/src/main/java/Tests/ObjectsValidation.java
+rename from src/test/java/Tests/ObjectsValidation.java
+rename to src/main/java/Tests/ObjectsValidation.java
+--- a/src/test/java/Tests/ObjectsValidation.java	(revision 2ff3d7bf3e76a42429b5ad277e6779a762488638)
++++ b/src/main/java/Tests/ObjectsValidation.java	(date 1663265902231)
+@@ -66,7 +66,7 @@
+     public void validateSchemas() throws SQLException, IOException {
+         int index=0;
+         String object = "Schemas";
+-        ora_r = oracon.createStatement().executeQuery("select distinct owner from all_tables where owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY owner");
++        ora_r = oracon.createStatement().executeQuery("select distinct owner from all_tables ORDER BY owner");
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+             results1.add(ora_r.getString(1));
+@@ -119,7 +119,7 @@
+     public void validateTables() throws SQLException, IOException {
+         int index=1;
+         String object = "Tables";
+-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || table_name  from all_tables where owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY owner, table_name");
++        ora_r = oracon.createStatement().executeQuery("select owner || '.' || table_name  from all_tables ORDER BY owner, table_name");
+ 
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+@@ -171,7 +171,7 @@
+     public void validateViews() throws SQLException, IOException {
+         int index=2;
+         String object = "Views";
+-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || view_name from all_views WHERE owner not in ('ORDDATA','ORDS_METADATA','ORDSYS','GSMADMIN_INTERNAL','SYS','MDSYS','XDB','WMSYS','SYSTEM','CTXSYS','APEX_210200') ORDER BY owner, view_name");
++        ora_r = oracon.createStatement().executeQuery("select owner || '.' || view_name from all_views ORDER BY owner, view_name");
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+             results1.add(ora_r.getString(1));
+@@ -224,7 +224,7 @@
+     public void validateIndex() throws SQLException, IOException {
+         int index=3;
+         String object = "Indexes";
+-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || index_name  from all_indexes WHERE owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY owner, INDEx_name");
++        ora_r = oracon.createStatement().executeQuery("select owner || '.' || index_name  from all_indexes ORDER BY owner, INDEx_name");
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+             results1.add(ora_r.getString(1));
+@@ -276,7 +276,7 @@
+     public void validateProcedures() throws SQLException, IOException {
+         int index=4;
+         String object = "Procedures";
+-        ora_r = oracon.createStatement().executeQuery("SELECT Procedure_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='PACKAGE' AND PROCEDURE_NAME IS NOT NULL and owner not in ('WMSYS','ORDS_METADATA','ORDPLUGINS','ORDSYS','GSMADMIN_INTERNAL','APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB','ORDDATA') ORDER BY Procedure_name");
++        ora_r = oracon.createStatement().executeQuery("SELECT Procedure_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='PACKAGE' AND PROCEDURE_NAME IS NOT NULL ORDER BY Procedure_name");
+ 
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+@@ -328,7 +328,7 @@
+     public void validateFunctions() throws SQLException, IOException {
+         int index=5;
+         String object = "Functions";
+-        ora_r = oracon.createStatement().executeQuery("SELECT owner || '.' || Object_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='FUNCTION' AND  owner not in ('ORDSYS','GSMADMIN_INTERNAL','APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB')ORDER BY owner, Object_name");
++        ora_r = oracon.createStatement().executeQuery("SELECT owner || '.' || Object_name FROM ALL_PROCEDURES WHERE OBJECT_TYPE='FUNCTION' ORDER BY owner, Object_name");
+ 
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+@@ -380,7 +380,7 @@
+     public void validateTriggers() throws SQLException, IOException {
+         int index=6;
+         String object = "Triggers";
+-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || TRIGGER_NAME from all_triggers WHERE owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB')ORDER BY owner, trigger_name");
++        ora_r = oracon.createStatement().executeQuery("select owner || '.' || TRIGGER_NAME from all_triggers ORDER BY owner, trigger_name");
+ 
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+@@ -433,7 +433,7 @@
+     public void validateSequences() throws SQLException, IOException {
+         int index=7;
+         String object = "Sequences";
+-        ora_r = oracon.createStatement().executeQuery("select sequence_owner || '.' || sequence_name from all_sequences WHERE sequence_owner not in ('APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB') ORDER BY sequence_owner, sequence_name");
++        ora_r = oracon.createStatement().executeQuery("select sequence_owner || '.' || sequence_name from all_sequences  ORDER BY sequence_owner, sequence_name");
+ 
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+@@ -487,7 +487,7 @@
+     public void validateConstraints() throws SQLException, IOException {
+         int index=8;
+         String object = "Constraints";
+-        ora_r = oracon.createStatement().executeQuery("select owner || '.' || Constraint_name from ALL_CONSTRAINTS where constraint_type in ('P','F','C','U') and Constraint_name not like 'SYS%'  and owner not in ('WMSYS','ORDS_METADATA','ORDPLUGINS','ORDSYS','GSMADMIN_INTERNAL','APEX_210200','CTXSYS','KTHANG','MDSYS','SYS','SYSTEM','XDB','ORDDATA') order by owner, constraint_name");
++        ora_r = oracon.createStatement().executeQuery("select owner || '.' || Constraint_name from ALL_CONSTRAINTS where constraint_type in ('P','F','C','U') and Constraint_name not like 'SYS%' order by owner, constraint_name");
+ 
+         List<String> results1 = new ArrayList<String>();
+         while(ora_r.next()) {
+Index: src/main/java/org/example/Main.java
+===================================================================
+diff --git a/src/main/java/org/example/Main.java b/src/main/java/org/example/Main.java
+deleted file mode 100644
+--- a/src/main/java/org/example/Main.java	(revision 2ff3d7bf3e76a42429b5ad277e6779a762488638)
++++ /dev/null	(revision 2ff3d7bf3e76a42429b5ad277e6779a762488638)
+@@ -1,7 +0,0 @@
+-package org.example;
+-
+-public class Main {
+-    public static void main(String[] args) {
+-        System.out.println("Hello world!");
+-    }
+-}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"35ab37a6-6d3b-438c-8d04-47f0fecfb68b\" name=\"Changes\" comment=\"&quot;committing&quot;\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Enju4zDRRUVoSKDQGxk2s8TCRf\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"35ab37a6-6d3b-438c-8d04-47f0fecfb68b\" name=\"Changes\" comment=\"\" />\r\n      <created>1663238464368</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1663238464368</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"&quot;committing&quot;\">\r\n      <created>1663254705536</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1663254705536</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"&quot;committing&quot;\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"&quot;committing&quot;\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2ff3d7bf3e76a42429b5ad277e6779a762488638)
++++ b/.idea/workspace.xml	(date 1663262396475)
+@@ -4,7 +4,17 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="35ab37a6-6d3b-438c-8d04-47f0fecfb68b" name="Changes" comment="&quot;committing&quot;" />
++    <list default="true" id="35ab37a6-6d3b-438c-8d04-47f0fecfb68b" name="Changes" comment="&quot;committing&quot;">
++      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/Tests/ColumnMetadataBySchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/ColumnMetadataBySchema.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/Tests/ForeignKeyReferences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/ForeignKeyReferences.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/Tests/ObjectsValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/ObjectsValidation.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/Tests/TablesDataBySchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/TablesDataBySchema.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/Utils/CommonMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/CommonMethods.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/Utils/Connections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utils/Connections.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -19,6 +29,10 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="ROOT_SYNC" value="DONT_SYNC" />
++  </component>
++  <component name="GithubDefaultAccount">
++    <option name="defaultAccountId" value="353b0433-8b4b-4200-b201-fdbf00c971d7" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -31,11 +45,21 @@
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+   }
+ }]]></component>
++  <component name="RecentsManager">
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\002QGQ744\IdeaProjects\DatabaseValidation\src\main" />
++    </key>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -52,7 +76,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1663254705536</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="&quot;committing&quot;">
++      <created>1663255054874</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1663255054874</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 2ff3d7bf3e76a42429b5ad277e6779a762488638)
++++ b/.idea/vcs.xml	(date 1663256210617)
+@@ -2,5 +2,6 @@
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+     <mapping directory="$PROJECT_DIR$" vcs="Git" />
++    <mapping directory="$PROJECT_DIR$/DatabaseValidation" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+diff --git a/src/test/java/Utils/CommonMethods.java b/src/main/java/Utils/CommonMethods.java
+rename from src/test/java/Utils/CommonMethods.java
+rename to src/main/java/Utils/CommonMethods.java
+diff --git a/src/test/java/Tests/ColumnMetadataBySchema.java b/src/main/java/Tests/ColumnMetadataBySchema.java
+rename from src/test/java/Tests/ColumnMetadataBySchema.java
+rename to src/main/java/Tests/ColumnMetadataBySchema.java
+diff --git a/src/test/java/Tests/ForeignKeyReferences.java b/src/main/java/Tests/ForeignKeyReferences.java
+rename from src/test/java/Tests/ForeignKeyReferences.java
+rename to src/main/java/Tests/ForeignKeyReferences.java
+diff --git a/src/test/java/Tests/TablesDataBySchema.java b/src/main/java/Tests/TablesDataBySchema.java
+rename from src/test/java/Tests/TablesDataBySchema.java
+rename to src/main/java/Tests/TablesDataBySchema.java
+diff --git a/src/test/java/Utils/Connections.java b/src/main/java/Utils/Connections.java
+rename from src/test/java/Utils/Connections.java
+rename to src/main/java/Utils/Connections.java
